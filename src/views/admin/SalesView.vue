@@ -4,6 +4,6 @@
 
 <template>
     <div>
-        <h1>Desde Productos</h1>
+        <h1>Resumen de ventas</h1>
     </div>
 </template>
