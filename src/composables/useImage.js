@@ -1,9 +1,11 @@
+import { ref, computed } from 'vue'
 import { uid } from 'uid'
 import { useFirebaseStorage } from 'vuefire'
 import { getDownloadURL, ref as storageRef, uploadBytesResumable } from 'firebase/storage'
 
 export default function useImage(){
 
+    const url = ref('')
     const storage = useFirebaseStorage()
 
     const onFileChange = e => {
@@ -21,13 +23,20 @@ export default function useImage(){
                 // upload is complete
                 getDownloadURL(uploadTask.snapshot.ref)
                     .then((downloadURL) => {
-                        console.log(downloadURL)
+                        // console.log(downloadURL)
+                        url.value = downloadURL
                     })
             }
         )
     }
 
+    const isImageUploaded = computed(() => {
+        return url.value ? url.value : null
+    })
+
     return {
-        onFileChange
+        url,
+        onFileChange,
+        isImageUploaded
     }
 }
