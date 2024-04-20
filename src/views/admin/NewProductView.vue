@@ -15,8 +15,18 @@
         image: '',
     })
 
-    const submitHandler = data => {
+    const submitHandler = async data => {
         console.log(data)
+        const { image, ...values } = data
+
+        try {
+            await products.createProduct({
+                ...values,
+                image: url.value
+            })            
+        } catch (error) {
+            console.log(error)
+        }
     }
 </script>
 

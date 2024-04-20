@@ -25,6 +25,6 @@ export const useProductsStore =  defineStore('products', () => {
 
     return {
         createProduct,
-        categoryOptions
+        categoryOptions 
     }
 })
