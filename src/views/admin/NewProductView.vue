@@ -1,11 +1,13 @@
 <script setup>
-    import { reactive } from 'vue';
+    import { reactive } from 'vue'
+    import { useRouter } from 'vue-router'
     import Link from '@/components/Link.vue'
     import useImage from '@/composables/useImage'
     import { useProductsStore } from '@/stores/products'
 
     const { url, onFileChange, isImageUploaded } = useImage()
     const products = useProductsStore()
+    const router = useRouter()
 
     const formData = reactive({
         name: 'Sudadera',
@@ -23,7 +25,8 @@
             await products.createProduct({
                 ...values,
                 image: url.value
-            })            
+            })    
+            router.push({name: 'products'})        
         } catch (error) {
             console.log(error)
         }
